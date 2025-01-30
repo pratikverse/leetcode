@@ -9,14 +9,16 @@
 class Solution {
 public:
     bool hasCycle(ListNode *head) {
+        if (!head || !head->next) return false; // Edge case handling
+
         ListNode* slow = head;
-        ListNode* fast = head;
-        while(fast!=NULL and fast->next!=NULL){
+        ListNode* fast = head->next; // Slight optimization to avoid redundant checks
+
+        while (fast && fast->next) {
+            if (slow == fast) return true; // Check inside loop for early return
+            
             slow = slow->next;
             fast = fast->next->next;
-            if(slow==fast){
-                return true;
-        }
         }
         return false;
     }
